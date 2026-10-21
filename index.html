@@ -1,0 +1,442 @@
+<title>เลือกชุดตีน้ำบ่อกุ้ง</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#EDF2F1; --surface:#FFFFFF; --sunk:#E2EAE8; --ink:#14211F; --muted:#51625E; --line:#C9D5D2;
+  --accent:#0B6E78; --accent-soft:#D3EAEC; --go:#2C7A4B; --go-soft:#DBEFE2; --warn:#A6620F; --warn-soft:#F7E6CC; --risk:#B03A26; --risk-soft:#F6D9D2;
+  --display:"Chakra Petch","IBM Plex Sans Thai",system-ui,sans-serif;
+  --body:"IBM Plex Sans Thai",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){color-scheme:dark;
+  --bg:#0F1716; --surface:#172120; --sunk:#1E2A28; --ink:#E3ECEA; --muted:#98AAA6; --line:#2E3C39;
+  --accent:#4DB8C2; --accent-soft:#153739; --go:#6CC48E; --go-soft:#173323; --warn:#E3A657; --warn-soft:#3A2A15; --risk:#EA8A73; --risk-soft:#3D1E17;}}
+:root[data-theme="dark"]{color-scheme:dark;
+  --bg:#0F1716; --surface:#172120; --sunk:#1E2A28; --ink:#E3ECEA; --muted:#98AAA6; --line:#2E3C39;
+  --accent:#4DB8C2; --accent-soft:#153739; --go:#6CC48E; --go-soft:#173323; --warn:#E3A657; --warn-soft:#3A2A15; --risk:#EA8A73; --risk-soft:#3D1E17;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.6;padding-inline:16px;padding-block:0 56px}
+.wrap{max-width:1040px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);line-height:1.25;margin:0;text-wrap:balance}
+p{margin:0}
+header{padding-block:28px 18px;display:grid;gap:8px}
+header h1{font-size:clamp(1.6rem,4vw,2.2rem)}
+.lede{color:var(--muted);max-width:70ch}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin-bottom:18px}
+.tabs button{font:inherit;font-weight:600;background:none;border:none;border-bottom:3px solid transparent;color:var(--muted);padding:10px 14px;cursor:pointer}
+.tabs button[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+.tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.grid{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:820px){.grid{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px 18px;display:grid;gap:12px}
+.card h2{font-size:1.1rem}
+.f{display:grid;gap:4px}
+.f label{font-size:.86rem;font-weight:500}
+.f small{color:var(--muted);font-size:.78rem;line-height:1.4}
+.f input,.f select{font:inherit;padding:7px 10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);width:100%}
+.f input:focus-visible,.f select:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+details{border-top:1px dashed var(--line);padding-top:8px}
+summary{cursor:pointer;font-size:.86rem;color:var(--accent);font-weight:500}
+details .f{margin-top:10px}
+.verdict{border-radius:8px;padding:14px 18px;display:grid;gap:6px}
+.verdict.go{background:var(--go-soft)} .verdict.warn{background:var(--warn-soft)} .verdict.risk{background:var(--risk-soft)}
+.verdict b.h{font-family:var(--display);font-size:1.15rem}
+.verdict.go b.h{color:var(--go)} .verdict.warn b.h{color:var(--warn)} .verdict.risk b.h{color:var(--risk)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.kpi{background:var(--sunk);border-radius:6px;padding:10px 12px;display:grid;gap:2px}
+.kpi span{font-size:.78rem;color:var(--muted)}
+.kpi b{font-family:var(--display);font-size:1.3rem;font-variant-numeric:tabular-nums}
+.kpi i{font-style:normal;font-size:.78rem;color:var(--muted)}
+.tbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--sunk)}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.bar{height:10px;border-radius:5px;background:var(--sunk);overflow:hidden}
+.bar i{display:block;height:100%}
+ul.notes{margin:0;padding-left:1.1em;font-size:.88rem;color:var(--muted)}
+ul.notes li+li{margin-top:4px}
+.mono{font-family:var(--mono);font-size:.85em}
+.tag{display:inline-block;font-family:var(--mono);font-size:.7rem;padding:1px 7px;border-radius:3px;background:var(--sunk);color:var(--muted)}
+footer{margin-top:32px;padding-top:14px;border-top:1px solid var(--line);font-size:.8rem;color:var(--muted);display:grid;gap:6px}
+footer a{color:var(--accent)}
+.brand{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;padding-block:12px;border-bottom:1px solid var(--line)}
+.brand .co{display:grid;gap:0}
+.brand .co b{font-family:var(--display);font-size:1rem;letter-spacing:.02em}
+.brand .co span{font-size:.78rem;color:var(--muted)}
+.brand nav{display:flex;flex-wrap:wrap;gap:6px}
+.btn{display:inline-flex;align-items:center;gap:6px;font-size:.85rem;font-weight:600;text-decoration:none;border-radius:6px;padding:7px 12px;border:1px solid var(--accent);color:var(--accent);background:var(--surface)}
+.btn.fill{background:var(--accent);color:var(--surface)}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.notice{background:var(--warn-soft);border-radius:8px;padding:10px 14px;font-size:.84rem;margin-bottom:14px}
+.notice b{color:var(--warn)}
+.contact{margin-top:24px;background:var(--surface);border:1px solid var(--accent);border-radius:8px;padding:16px 18px;display:grid;gap:10px}
+.contact h2{font-size:1.1rem}
+.contact p{font-size:.9rem;color:var(--muted);max-width:70ch}
+.cinfo{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 16px;font-size:.95rem}
+.cinfo dt{color:var(--muted)}
+.cinfo dd{margin:0;font-weight:600;user-select:all;overflow-wrap:anywhere}
+.cinfo a{color:var(--accent)}
+.legal{margin-top:16px;background:var(--sunk);border-radius:8px;padding:14px 18px;display:grid;gap:6px;font-size:.82rem;color:var(--muted)}
+.legal h2{font-size:.95rem;color:var(--ink)}
+.legal ol{margin:0;padding-left:1.2em;display:grid;gap:4px}
+</style>
+
+<style>
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px}
+.opt{border:1px solid var(--line);border-radius:8px;padding:14px 16px;display:grid;gap:8px;align-content:start;background:var(--surface)}
+.opt.main{border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.opt h3{font-size:1rem}
+.opt .big{font-family:var(--display);font-size:1.25rem;font-weight:700;color:var(--accent)}
+.opt dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:.88rem}
+.opt dt{color:var(--muted)} .opt dd{margin:0;font-variant-numeric:tabular-nums}
+.checks{display:grid;gap:10px}
+.ck{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;border-radius:8px;padding:12px 14px}
+.ck.go{background:var(--go-soft)} .ck.warn{background:var(--warn-soft)} .ck.risk{background:var(--risk-soft)}
+.ck .ic{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-weight:700;color:var(--surface);font-family:var(--display)}
+.ck.go .ic{background:var(--go)} .ck.warn .ic{background:var(--warn)} .ck.risk .ic{background:var(--risk)}
+.ck b{display:block}
+.ck p{font-size:.88rem;color:var(--ink)}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg label{display:flex;gap:6px;align-items:center;font-size:.86rem;border:1px solid var(--line);border-radius:6px;padding:6px 10px;cursor:pointer;background:var(--bg)}
+.seg input{accent-color:var(--accent)}
+.hint{font-size:.8rem;color:var(--muted)}
+
+.bom{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px}
+.bom div{background:var(--sunk);border-radius:6px;padding:8px 10px;display:grid;gap:0;text-align:center}
+.bom b{font-family:var(--display);font-size:1.6rem;line-height:1.1;color:var(--ink);font-variant-numeric:tabular-nums}
+.bom span{font-size:.78rem;color:var(--muted)}
+.eq{font-size:.9rem;background:var(--accent-soft);border-radius:6px;padding:8px 12px}
+.eq b{color:var(--accent)}
+.pics{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px;align-items:start}
+.pic{display:grid;gap:4px}
+.pic figcaption{font-size:.78rem;color:var(--muted)}
+.pic svg{width:100%;height:auto;display:block}
+svg .water{fill:var(--accent-soft);stroke:var(--accent);stroke-width:2}
+svg .bank{fill:var(--sunk)}
+svg .arm{stroke:var(--ink);stroke-width:3;stroke-linecap:round}
+svg .motor{fill:var(--ink)}
+svg .vfd{fill:var(--accent)}
+svg .gear{fill:var(--muted)}
+svg .wheel{fill:var(--surface);stroke:var(--ink);stroke-width:1.5}
+svg .wheel.bad{stroke:var(--risk);fill:var(--risk-soft)}
+svg .arm.bad{stroke:var(--risk)}
+svg .lbl{fill:var(--ink);font-family:var(--body);font-size:11px}
+svg .lbl.m{fill:var(--muted);font-size:10px}
+svg .lbl.s{font-size:15px;font-weight:500}
+svg .flow{fill:none;stroke:var(--accent);stroke-width:1.5;stroke-dasharray:4 4}
+svg .flowhead{fill:var(--accent)}
+[hidden]{display:none!important}
+.seg label{white-space:nowrap}
+</style>
+
+<div class="wrap">
+<div class="brand">
+  <div class="co"><b>AutomationSource</b><span>บริษัท ฤทธิ์ อนันต์ เอ็นจิเนียริ่ง แอนด์ ซัพพลาย จำกัด · ผู้จำหน่ายอินเวอร์เตอร์ SAKO · เครื่องมือนี้ให้ใช้ฟรี</span></div>
+  <nav aria-label="ช่องทางติดต่อ"><a class="btn" href="#h-contact">ติดต่อเรา</a><a class="btn fill" href="https://www.automationsource.biz/" target="_blank" rel="noopener">www.automationsource.biz</a></nav>
+</div>
+<header>
+  <span class="eyebrow">สำหรับผู้เลี้ยงกุ้ง</span>
+  <h1>เลือกชุดตีน้ำบ่อกุ้ง</h1>
+  <p class="lede">บอกแค่ขนาดบ่อกับจำนวนกุ้งที่จะลง ระบบคำนวณจำนวนใบพัด มอเตอร์ และเกียร์ที่เหมาะสมให้ ถ้ามีชุดตีน้ำอยู่แล้ว ใส่ข้อมูลชุดเดิมเพื่อตรวจว่าใช้ได้หรือต้องแก้ ค่าที่ใช้อ้างอิงจากคู่มือการเลี้ยงกุ้งขาวแบบพัฒนาของกรมประมง</p>
+</header>
+
+<p class="notice"><b>ผลจากแอปเป็นค่าประมาณเพื่อวางแผนเบื้องต้น</b> ก่อนซื้อหรือติดตั้งจริง ควรให้ช่างหรือวิศวกรตรวจหน้างาน และอ่านข้อตกลงการใช้งานท้ายหน้า</p>
+<div class="tabs" role="tablist">
+  <button role="tab" id="t-design" aria-selected="true" data-p="p-design">1 · ยังไม่มีชุดตีน้ำ</button>
+  <button role="tab" id="t-check" aria-selected="false" data-p="p-check">2 · มีชุดตีน้ำอยู่แล้ว</button>
+  <button role="tab" id="t-ref" aria-selected="false" data-p="p-ref">ข้อมูลอ้างอิง</button>
+</div>
+
+<!-- ========== PART 1 ========== -->
+<section id="p-design" class="grid">
+  <form class="card" id="fd" onsubmit="return false">
+    <h2>บ่อของคุณ</h2>
+    <div class="f"><label for="d-rai">ขนาดบ่อ (ไร่)</label><input id="d-rai" type="number" inputmode="decimal" min="0.25" max="30" step="0.25" value="2"></div>
+    <div class="f"><label for="d-shrimp">จำนวนกุ้งที่จะลง (ตัว)</label><input id="d-shrimp" type="number" inputmode="numeric" min="1000" step="10000" value="200000"><small id="d-dens"></small></div>
+  </form>
+  <div class="card" id="rd" aria-live="polite"></div>
+</section>
+
+<!-- ========== PART 2 ========== -->
+<section id="p-check" class="grid" hidden>
+  <form class="card" id="fc" onsubmit="return false">
+    <h2>บ่อของคุณ</h2>
+    <div class="row2">
+      <div class="f"><label for="c-rai">ขนาดบ่อ (ไร่)</label><input id="c-rai" type="number" inputmode="decimal" min="0.25" max="30" step="0.25" value="2"></div>
+      <div class="f"><label for="c-shrimp">จำนวนกุ้ง (ตัว)</label><input id="c-shrimp" type="number" inputmode="numeric" min="1000" step="10000" value="200000"></div>
+    </div>
+    <h2>ชุดตีน้ำที่มีอยู่</h2>
+    <div class="row2">
+      <div class="f"><label for="c-sets">จำนวนชุด</label><input id="c-sets" type="number" inputmode="numeric" min="1" max="40" step="1" value="2"></div>
+      <div class="f"><label for="c-n">ใบพัดต่อชุด</label><input id="c-n" type="number" inputmode="numeric" min="1" max="40" step="1" value="12"></div>
+    </div>
+    <div class="f"><label for="c-hp">มอเตอร์ต่อชุด (แรงม้า)</label><input id="c-hp" type="number" inputmode="decimal" min="0.5" max="30" step="0.5" value="3"><small>ดูจากป้ายข้างมอเตอร์ (HP) ถ้าเป็น kW ให้คูณ 1.34</small></div>
+    <div class="f"><label>รู้รอบใบพัดจากอะไร</label>
+      <div class="seg">
+        <label><input type="radio" name="c-mode" value="ratio" checked> อัตราทดเกียร์</label>
+        <label><input type="radio" name="c-mode" value="count"> นับรอบเอง</label>
+      </div></div>
+    <div class="f" id="c-ratio-f"><label for="c-ratio">อัตราทดเกียร์ 1 : ?</label><input id="c-ratio" type="number" inputmode="decimal" min="5" max="60" step="0.5" value="15"><small>ดูจากป้ายเกียร์ เช่น 1:15 ใส่ 15</small></div>
+    <div class="f" id="c-count-f" hidden><label for="c-rpm">ใบพัดหมุนกี่รอบใน 1 นาที</label><input id="c-rpm" type="number" inputmode="numeric" min="20" max="200" step="1" value="95"><small>ทำเครื่องหมายที่ใบพัด 1 ใบ แล้วนับรอบตอนเดินเต็มที่ 1 นาที</small></div>
+  </form>
+  <div class="card" id="rc" aria-live="polite"></div>
+</section>
+
+<!-- ========== REFERENCE (inserted) ========== -->
+<section id="p-ref" hidden>
+  <div class="card">
+    <h2>ค่ามาตรฐานที่ใช้คำนวณ</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>หัวข้อ</th><th>ค่า</th><th>ที่มา</th></tr></thead>
+      <tbody>
+        <tr><td>ขนาดบ่อ / ความลึก</td><td>2–6 ไร่ · 1.2–1.8 ม.</td><td>กรมประมง</td></tr>
+        <tr><td>อัตราปล่อย</td><td>100,000 ตัว/ไร่ (กุ้งใหญ่ 80,000)</td><td>กรมประมง</td></tr>
+        <tr><td>จำนวนชุดตีน้ำ</td><td>บ่อ 4 ไร่ 4 ชุด ด้านละชุด (≈1 ชุด/ไร่)</td><td>กรมประมง</td></tr>
+        <tr><td>ใบพัดต่อชุด</td><td>12–16 ใบ (คิดเป็นใบพัดต่อไร่)</td><td>กรมประมง</td></tr>
+        <tr><td>รอบใบพัด</td><td>85–90 รอบ/นาที</td><td>กรมประมง</td></tr>
+        <tr><td>กำลังมอเตอร์</td><td>4 ใบพัด ต่อ 2 แรงม้า (0.5 แรงม้า/ใบ)</td><td>กรมประมง</td></tr>
+        <tr><td>ตารางเปิดเครื่อง</td><td>เดือน 1–2 กลางวันครึ่งหนึ่ง กลางคืนเต็ม · เดือน 3 ขึ้นไปเต็มตลอด · DO เช้า &gt; 5 มก./ล.</td><td>กรมประมง</td></tr>
+        <tr><td>ตรวจไขว้แรงม้ารวม</td><td>ผลผลิตทุก 300–500 กก. ใช้ 1 แรงม้า</td><td>Boyd, Global Seafood Alliance</td></tr>
+      </tbody></table></div>
+  </div>
+  <div class="card" style="margin-top:14px">
+    <h2>หลักวิศวกรรมที่ใช้</h2>
+    <ul class="notes">
+      <li><b>กำลังกับรอบ:</b> ตามทฤษฎีกำลังเพิ่มประมาณรอบยกกำลังสาม แต่ผลวัดจริงในงานวิจัยเปลี่ยนตามรอบน้อยกว่านั้น แอปนี้จึงคิดแบบเผื่อไว้สูง: รอบเกิน 88 รอบ/นาทีคิดแบบยกกำลังสาม รอบต่ำกว่าคิดว่ากำลังลดลงเพียงเล็กน้อย และไม่แสดงตัวเลขประหยัดไฟเป็นเปอร์เซ็นต์</li>
+      <li><b>แรงบิด:</b> T (N·m) = 9,550 × กำลัง (kW) ÷ รอบ (รอบ/นาที)</li>
+      <li><b>Service factor เกียร์ 1.5–2.0:</b> สำหรับงานเดิน 24 ชม. มีแรงกระแทกปานกลาง ตามแนวทาง service factor ของ AGMA</li>
+      <li><b>ประสิทธิภาพเกียร์ที่ใช้:</b> เฟืองหนอนประมาณ 80 % · เฟืองเฉียง/ดอกจอกประมาณ 95 % (ค่าทั่วไป ตรวจกับเอกสารผู้ผลิตจริง)</li>
+      <li><b>มอเตอร์:</b> 4 โพล ≈1,450 รอบ/นาที · ระดับประสิทธิภาพ IE2/IE3 ตาม IEC 60034-30-1 · ฟาร์มริมทะเลควรกันน้ำ IP55 ขึ้นไป (IEC 60034-5) และสีกันเค็ม</li>
+      <li><b>ใช้กับ SAKO ไฟ 1 เฟส:</b> SAKO จ่ายไฟออก 3 เฟส 220V ใช้มอเตอร์ 220/380V ต่อแบบเดลต้า (Δ)</li>
+    </ul>
+  </div>
+</section>
+
+<section class="contact" aria-labelledby="h-contact">
+  <h2 id="h-contact">ปรึกษาการเลือกชุดตีน้ำและอินเวอร์เตอร์ SAKO</h2>
+  <p>ต้องการให้ช่วยตรวจผลคำนวณ เลือกรุ่นอินเวอร์เตอร์ หรือขอใบเสนอราคา ติดต่อ AutomationSource โดยบริษัท ฤทธิ์ อนันต์ เอ็นจิเนียริ่ง แอนด์ ซัพพลาย จำกัด</p>
+  <dl class="cinfo">
+    <dt>โทร</dt><dd><a href="tel:0612954699">061-295-4699</a></dd>
+    <dt>LINE</dt><dd>ritanan</dd>
+    <dt>อีเมล</dt><dd><a href="mailto:sales.automationsource@gmail.com">sales.automationsource@gmail.com</a></dd>
+    <dt>ร้านค้าออนไลน์</dt><dd><a href="https://www.automationsource.biz/" target="_blank" rel="noopener">www.automationsource.biz</a></dd>
+  </dl>
+</section>
+
+<section class="legal" aria-labelledby="h-legal">
+  <h2 id="h-legal">ข้อตกลงและข้อจำกัดความรับผิดชอบ</h2>
+  <ol>
+    <li>แอปนี้ให้ใช้ฟรีเพื่อประกอบการวางแผนเบื้องต้นเท่านั้น ผลที่ได้เป็นค่าประมาณจากค่ามาตรฐานทั่วไปและข้อมูลที่ผู้ใช้กรอก ไม่ใช่การออกแบบหรือรับรองทางวิศวกรรม</li>
+    <li>สภาพบ่อ ความลึก ชนิดใบพัด เกียร์ มอเตอร์ ระบบไฟฟ้า และวิธีเลี้ยงของแต่ละฟาร์มต่างกัน ผลจริงอาจต่างจากที่แอปแสดง ผู้ใช้ควรให้ช่างไฟฟ้าหรือวิศวกรตรวจสอบหน้างานก่อนซื้อ ติดตั้ง หรือปรับเปลี่ยนอุปกรณ์ และควรวัดกระแสมอเตอร์หลังติดตั้ง</li>
+    <li>งานติดตั้งไฟฟ้าต้องทำโดยช่างที่มีความรู้ ตามมาตรฐานการติดตั้งทางไฟฟ้าและคู่มือของผู้ผลิตอุปกรณ์</li>
+    <li>บริษัท ฤทธิ์ อนันต์ เอ็นจิเนียริ่ง แอนด์ ซัพพลาย จำกัด (AutomationSource) ไม่รับผิดชอบต่อความเสียหายใด ๆ ทั้งทางตรงและทางอ้อม รวมถึงความเสียหายต่ออุปกรณ์ ผลผลิต สัตว์น้ำ หรือรายได้ ที่เกิดจากการใช้หรือการตัดสินใจโดยอาศัยผลจากแอปนี้</li>
+    <li>การรับประกันสินค้าเป็นไปตามเงื่อนไขของสินค้าแต่ละรายการที่ซื้อจากบริษัท แยกจากการใช้แอปนี้</li>
+    <li>บริษัทอาจปรับปรุงสูตร ค่ามาตรฐาน หรือเนื้อหาของแอปได้โดยไม่ต้องแจ้งล่วงหน้า · การใช้แอปถือว่าผู้ใช้ยอมรับข้อตกลงนี้</li>
+  </ol>
+</section>
+
+<footer>
+  <p>ที่มา: <a href="https://www4.fisheries.go.th/local/file_document/20200120135657_1_file.pdf" target="_blank" rel="noopener">คู่มือการเลี้ยงกุ้งขาวแบบพัฒนา กรมประมง</a> ·
+  <a href="https://www.globalseafood.org/advocate/energy-use-in-aquaculture-pond-aeration-part-1/" target="_blank" rel="noopener">Boyd, Global Seafood Alliance: Energy use in aquaculture pond aeration</a></p>
+  <p>ประสิทธิภาพมอเตอร์ที่ใช้คำนวณ 85 % · ค่าประมาณเพื่อวางแผน ไม่ใช่ใบรับรองทางวิศวกรรม · ยืนยันด้วยการวัดกระแสหลังติดตั้ง</p>
+  <p>© 2026 บริษัท ฤทธิ์ อนันต์ เอ็นจิเนียริ่ง แอนด์ ซัพพลาย จำกัด · AutomationSource · ปรับปรุงล่าสุด ต.ค. 2026</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+var HP_PER_WHEEL=0.5, RPM_STD=88, RPM_LO=85, RPM_HI=90, MOTOR_RPM=1450;
+var STD_HP=[2,3,5.5,7.5,10,15];
+var HP_KW={2:1.5,3:2.2,5.5:4,7.5:5.5,10:7.5,15:11};
+var MAX_1PH=3;
+var $=function(id){return document.getElementById(id)};
+function fmt(x,d){return Number(x).toLocaleString('th-TH',{minimumFractionDigits:d||0,maximumFractionDigits:d||0})}
+function num(id,def){var v=parseFloat($(id).value);return isFinite(v)&&v>0?v:def}
+
+/* tabs */
+var tabs=document.querySelectorAll('.tabs button');
+tabs.forEach(function(b){b.addEventListener('click',function(){
+  tabs.forEach(function(x){x.setAttribute('aria-selected',x===b?'true':'false');$(x.dataset.p).hidden=(x!==b);});
+  try{localStorage.setItem('aerator-tab',b.id)}catch(e){}
+});});
+try{var t=localStorage.getItem('aerator-tab');if(t&&$(t))$(t).click();}catch(e){}
+
+/* กรมประมง: 80,000 ตัว/ไร่ -> 12 ใบ/ไร่ , 100,000 -> 16 ใบ/ไร่ */
+function wheelsPerRai(dens){var w=12+(dens-80000)/20000*4;return Math.max(10,w)}
+function needWheels(rai,shrimp){var d=shrimp/rai;return {dens:d,wpr:wheelsPerRai(d),total:Math.ceil(rai*wheelsPerRai(d))}}
+/* เผื่อไว้สูงทั้งสองทาง: รอบสูงกว่ามาตรฐานคิดแบบยกกำลัง 3 · รอบต่ำกว่าคิดว่ากำลังลดลงน้อย (ผลวัดจริงในงานวิจัยเปลี่ยนตามรอบน้อยกว่าทฤษฎี) */
+function powFactor(rpm){var r=rpm/RPM_STD;return r>=1?Math.pow(r,3):Math.pow(r,0.68)}
+function hpNeeded(wheels,rpm){return wheels*HP_PER_WHEEL*powFactor(rpm)}
+function torque(hp,rpm){return 9550*hp*0.746/rpm}
+function ratioFor(rpm){return MOTOR_RPM/rpm}
+function densNote(d){
+  if(d>150000) return {cls:'risk',t:'ความหนาแน่น '+fmt(d)+' ตัว/ไร่ สูงกว่าคู่มือกรมประมงมาก (100,000) ต้องใช้การตีน้ำมากกว่าที่คำนวณ ควรปรึกษาผู้เชี่ยวชาญ'};
+  if(d>110000) return {cls:'warn',t:'ความหนาแน่น '+fmt(d)+' ตัว/ไร่ สูงกว่าค่าแนะนำ 100,000 ตัว/ไร่'};
+  return {cls:'',t:'ความหนาแน่น '+fmt(d)+' ตัว/ไร่ (กรมประมงแนะนำ 80,000–100,000)'};
+}
+
+/* -------- PART 1 -------- */
+function planSets(total,rai,maxHp){
+  // จัดชุด: อย่างน้อย 1 ชุด/ไร่ และ 2 ชุดขึ้นไป, ใบพัดต่อชุดไม่เกิน maxHp*2
+  var minSets=Math.max(2,Math.ceil(rai)), maxW=Math.floor(maxHp/HP_PER_WHEEL);
+  var sets=Math.max(minSets,Math.ceil(total/maxW)), w=Math.ceil(total/sets);
+  var hp=STD_HP.find(function(h){return h>=w*HP_PER_WHEEL})||maxHp;
+  return {sets:sets,w:w,hp:hp};
+}
+/* ---------- ภาพ ---------- */
+function setSVG(w,bad){
+  // ภาพ 1 ชุด: อินเวอร์เตอร์ - มอเตอร์ - เกียร์ - เพลาและใบพัด
+  var n=Math.min(w,16), gap=Math.min(30,Math.max(16,240/n)), x0=170, W=x0+n*gap+10, H=104;
+  var g='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="1 ชุด: อินเวอร์เตอร์ 1 ตัว มอเตอร์ 1 ตัว เกียร์ 1 ตัว ใบพัด '+w+' ใบ">';
+  g+='<rect class="vfd" x="6" y="28" width="40" height="44" rx="5"/><text class="lbl s" x="2" y="18">อินเวอร์เตอร์</text>';
+  g+='<line class="arm" x1="46" y1="50" x2="70" y2="50" style="stroke-width:1.5;stroke-dasharray:3 3"/>';
+  g+='<rect class="motor" x="70" y="32" width="50" height="36" rx="5"/><text class="lbl s" x="88" y="96" text-anchor="middle">มอเตอร์</text>';
+  g+='<rect class="gear" x="122" y="37" width="34" height="26" rx="3"/><text class="lbl s" x="139" y="96" text-anchor="middle">เกียร์</text>';
+  g+='<line class="arm'+(bad?' bad':'')+'" x1="156" y1="50" x2="'+(x0+n*gap)+'" y2="50"/>';
+  for(var i=0;i<n;i++){var cx=x0+i*gap+gap/2;g+='<circle class="wheel'+(bad?' bad':'')+'" cx="'+cx+'" cy="50" r="'+Math.min(12,gap*0.42)+'"/>';}
+  g+='<text class="lbl s" x="'+(x0+n*gap/2)+'" y="96" text-anchor="middle">ใบพัด '+w+' ใบ'+(w>16?' (ภาพย่อ)':'')+'</text></svg>';
+  return g;
+}
+function pondSVG(rai,sets,w,bad){
+  // ภาพบ่อมองจากด้านบน: วางชุดรอบบ่อ ด้านละชุด วนตามลำดับ
+  var W=360,H=240,m=26,pw=W-2*m,ph=H-2*m;
+  var g='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="บ่อ '+rai+' ไร่ มีชุดตีน้ำ '+sets+' ชุด">';
+  g+='<rect class="bank" x="0" y="0" width="'+W+'" height="'+H+'" rx="10"/>';
+  g+='<rect class="water" x="'+m+'" y="'+m+'" width="'+pw+'" height="'+ph+'" rx="6"/>';
+  // ลูกศรน้ำหมุน
+  g+='<ellipse class="flow" cx="'+(W/2)+'" cy="'+(H/2)+'" rx="'+(pw*0.28)+'" ry="'+(ph*0.25)+'"/>';
+  g+='<path class="flowhead" d="M'+(W/2+6)+' '+(H/2-ph*0.25-5)+' l10 5 l-10 5z"/>';
+  g+='<text class="lbl m" x="'+(W/2)+'" y="'+(H/2+4)+'" text-anchor="middle">น้ำหมุนรอบบ่อ</text>';
+  var sides=[[],[],[],[]]; for(var i=0;i<sets;i++) sides[i%4].push(i);
+  var inset=20;
+  sides.forEach(function(list,si){
+    var k=list.length; if(!k) return;
+    var horiz=(si%2===0), len=horiz?pw:ph;
+    var seg=len/k, armLen=Math.min(seg*0.8, Math.max(40,w*9));
+    list.forEach(function(idx,j){
+      var c=(j+0.5)*seg, a=c-armLen/2, b=c+armLen/2, x1,y1,x2,y2,mx,my;
+      if(si===0){y1=y2=m+inset;x1=m+a;x2=m+b;mx=x1;my=y1;}
+      else if(si===1){x1=x2=W-m-inset;y1=m+a;y2=m+b;mx=x1;my=y1;}
+      else if(si===2){y1=y2=H-m-inset;x1=W-m-a;x2=W-m-b;mx=x1;my=y1;}
+      else {x1=x2=m+inset;y1=H-m-a;y2=H-m-b;mx=x1;my=y1;}
+      g+='<line class="arm'+(bad?' bad':'')+'" x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'"/>';
+      var nw=Math.min(w,12);
+      for(var t=1;t<=nw;t++){var f=t/(nw+1);g+='<circle class="wheel'+(bad?' bad':'')+'" cx="'+(x1+(x2-x1)*f)+'" cy="'+(y1+(y2-y1)*f)+'" r="3.6"/>';}
+      g+='<rect class="motor" x="'+(mx-6)+'" y="'+(my-6)+'" width="12" height="12" rx="2"/>';
+      g+='<text class="lbl m" x="'+(mx+(si===1?-10:10))+'" y="'+(my+(si===0?-8:(si===2?16:-8)))+'" text-anchor="'+(si===1?'end':'start')+'">'+(idx+1)+'</text>';
+    });
+  });
+  g+='</svg>';
+  return g;
+}
+function bomHTML(sets,w,ctrl){
+  return '<div class="bom">'+
+    '<div><b>'+sets+'</b><span>อินเวอร์เตอร์ (ตัว)</span></div>'+
+    '<div><b>'+sets+'</b><span>มอเตอร์ (ตัว)</span></div>'+
+    '<div><b>'+sets+'</b><span>เกียร์ (ตัว)</span></div>'+
+    '<div><b>'+(sets*w)+'</b><span>ใบพัดรวม (ใบ)</span></div>'+
+    (ctrl?'<div><b>1</b><span>ชุดควบคุม (ตัวเลือก)</span></div>':'')+'</div>';
+}
+function optCard(title,p,main,note,rai){
+  var T=torque(p.hp,RPM_STD), ratio=ratioFor(RPM_STD);
+  return '<div class="opt'+(main?' main':'')+'"><h3>'+title+'</h3>'+
+    '<span class="big">ใช้ '+p.sets+' ชุด · ชุดละ '+p.w+' ใบพัด</span>'+
+    '<p class="eq"><b>1 ชุด</b> = อินเวอร์เตอร์ 1 ตัว + มอเตอร์ '+p.hp+' แรงม้า 1 ตัว + เกียร์ 1 ตัว + ใบพัด '+p.w+' ใบ</p>'+
+    '<p style="font-size:.86rem;font-weight:600">ทั้งบ่อต้องใช้</p>'+bomHTML(p.sets,p.w,true)+
+    '<div class="pics"><figure class="pic" style="margin:0">'+setSVG(p.w,false)+'<figcaption>หน้าตา 1 ชุด</figcaption></figure>'+
+    '<figure class="pic" style="margin:0">'+pondSVG(rai,p.sets,p.w,false)+'<figcaption>ตัวอย่างการวางในบ่อ (มองจากด้านบน) ตัวเลข = ชุดที่</figcaption></figure></div>'+
+    '<dl><dt>มอเตอร์</dt><dd>'+p.hp+' แรงม้า ('+HP_KW[p.hp]+' kW) 4 โพล 3 เฟส</dd>'+
+    '<dt>เกียร์</dt><dd>ทด 1:'+fmt(ratio,1)+' (ใบพัด '+RPM_STD+' รอบ/นาที) · รับแรงบิด ≥ '+fmt(T*1.5)+' N·m (แนะนำ '+fmt(T*2)+')</dd>'+
+    '<dt>อินเวอร์เตอร์</dt><dd>SAKO '+HP_KW[p.hp]+' kW '+(note||'')+'</dd>'+
+    '<dt>ชุดควบคุม</dt><dd>ตัวเลือก สอบถามรายละเอียดกับบริษัท</dd></dl></div>';
+}
+function design(){
+  var rai=num('d-rai',1), shrimp=num('d-shrimp',100000);
+  var n=needWheels(rai,shrimp), dn=densNote(n.dens);
+  $('d-dens').textContent=dn.t;
+  var p1=planSets(n.total,rai,MAX_1PH), p3=planSets(n.total,rai,15);
+  var h='<div class="verdict go"><b class="h">บ่อนี้ต้องใช้ใบพัดตีน้ำประมาณ '+n.total+' ใบ</b>'+
+    '<p>บ่อ '+fmt(rai,2).replace(/\.?0+$/,'')+' ไร่ กุ้ง '+fmt(shrimp)+' ตัว · '+fmt(n.wpr,1)+' ใบพัด/ไร่ ตามคู่มือกรมประมง · ใบพัด 1 ใบใช้มอเตอร์ 0.5 แรงม้า ที่ '+RPM_LO+'–'+RPM_HI+' รอบ/นาที</p></div>';
+  if(dn.cls) h+='<div class="verdict '+dn.cls+'"><p>'+dn.t+'</p></div>';
+  h+='<div class="checks">'+optCard('ถ้าใช้ไฟบ้าน 1 เฟส 220V',p1,true,'ไฟเข้า 1 เฟส (มอเตอร์ต่อแบบเดลต้า 220V)',rai)+optCard('ถ้าใช้ไฟ 3 เฟส 380V',p3,false,'ไฟเข้า 3 เฟส',rai)+'</div>';
+  h+='<ul class="notes">'+
+    '<li>วางชุดตีน้ำกระจายรอบบ่อ ให้น้ำหมุนเป็นวงทางเดียวกัน</li>'+
+    '<li>เกียร์ที่มีอัตราทดใกล้เคียง เช่น 1:15 หรือ 1:20 ใช้ได้ โดยตั้งอินเวอร์เตอร์ให้ใบพัดได้ '+RPM_STD+' รอบ/นาที (1:15 → ตั้ง ≈ '+fmt(50*RPM_STD/(MOTOR_RPM/15),1)+' Hz)</li>'+
+    '<li>ตามคู่มือกรมประมง: เดือนที่ 1–2 กลางวันเปิดครึ่งหนึ่ง กลางคืนเปิดทุกชุด เดือนที่ 3 ขึ้นไปเปิดทุกชุดตลอด และให้ออกซิเจนตอนเช้าสูงกว่า 5 มก./ล.</li>'+
+    '<li>ไฟ 1 เฟสหลายชุด ตรวจขนาดมิเตอร์ก่อนติดตั้ง และสตาร์ททีละชุด</li></ul>';
+  $('rd').innerHTML=h;
+}
+
+/* -------- PART 2 -------- */
+function ck(cls,title,body){var ic=cls==='go'?'✓':(cls==='warn'?'!':'✕');return '<div class="ck '+cls+'"><span class="ic" aria-hidden="true">'+ic+'</span><div><b>'+title+'</b><p>'+body+'</p></div></div>'}
+function check(){
+  var rai=num('c-rai',1), shrimp=num('c-shrimp',100000), sets=Math.round(num('c-sets',1)), w=Math.round(num('c-n',1)), hp=num('c-hp',3);
+  var mode=document.querySelector('input[name="c-mode"]:checked').value;
+  $('c-ratio-f').hidden=mode!=='ratio'; $('c-count-f').hidden=mode!=='count';
+  var rpm=mode==='ratio'?MOTOR_RPM/num('c-ratio',15):num('c-rpm',90);
+  var n=needWheels(rai,shrimp), have=sets*w;
+  var need=hpNeeded(w,rpm), load=need/hp;
+  var res=[], bad=0, warn=0;
+
+  // 1) ใบพัดพอสำหรับบ่อไหม
+  if(have>=n.total*0.95) res.push(ck('go','ใบพัดพอสำหรับบ่อ','มี '+have+' ใบ บ่อนี้ต้องการประมาณ '+n.total+' ใบ'));
+  else if(have>=n.total*0.8){warn++;res.push(ck('warn','ใบพัดค่อนข้างน้อย','มี '+have+' ใบ ควรมีประมาณ '+n.total+' ใบ ขาด '+(n.total-have)+' ใบ ระวังออกซิเจนต่ำช่วงเดือนที่ 3 ขึ้นไป'));}
+  else {bad++;res.push(ck('risk','ใบพัดไม่พอสำหรับบ่อ','มี '+have+' ใบ ควรมีประมาณ '+n.total+' ใบ ขาด '+(n.total-have)+' ใบ'));}
+
+  // 2) มอเตอร์รับไหวไหม
+  if(load<=1.0) res.push(ck('go','มอเตอร์รับไหว','ใบพัด '+w+' ใบ ที่ '+fmt(rpm)+' รอบ/นาที ต้องใช้ประมาณ '+fmt(need,1)+' แรงม้า มอเตอร์ '+fmt(hp,1)+' แรงม้า ใช้ไป '+fmt(load*100)+' %'));
+  else if(load<=1.15){warn++;res.push(ck('warn','มอเตอร์ทำงานเกือบเต็มกำลัง','ต้องใช้ประมาณ '+fmt(need,1)+' แรงม้า มอเตอร์ '+fmt(hp,1)+' แรงม้า ('+fmt(load*100)+' %) มอเตอร์จะร้อนเมื่อใบพัดมีตะไคร่หรือเกียร์เริ่มฝืด'));}
+  else {bad++;res.push(ck('risk','มอเตอร์โหลดเกิน','ใบพัด '+w+' ใบ ที่ '+fmt(rpm)+' รอบ/นาที ต้องใช้ประมาณ '+fmt(need,1)+' แรงม้า แต่มอเตอร์มี '+fmt(hp,1)+' แรงม้า ('+fmt(load*100)+' %) มอเตอร์จะร้อนและเสียเร็ว'));}
+
+  // 3) รอบใบพัด
+  if(rpm>=80&&rpm<=95) res.push(ck('go','รอบใบพัดเหมาะสม',fmt(rpm)+' รอบ/นาที (กรมประมงแนะนำ '+RPM_LO+'–'+RPM_HI+')'));
+  else if(rpm>95){warn++;res.push(ck('warn','ใบพัดหมุนเร็วเกินไป',fmt(rpm)+' รอบ/นาที สูงกว่าค่าแนะนำ '+RPM_LO+'–'+RPM_HI+' ใบพัดหมุนเร็วกินไฟมากขึ้นโดยไม่ช่วยเติมออกซิเจนเพิ่มตามสัดส่วน'));}
+  else {warn++;res.push(ck('warn','ใบพัดหมุนช้าเกินไป',fmt(rpm)+' รอบ/นาที ต่ำกว่าค่าแนะนำ อาจเติมออกซิเจนไม่พอ'));}
+
+  // สรุป
+  var head=bad?'<div class="verdict risk"><b class="h">ชุดเดิมต้องแก้ไข</b><p>พบ '+bad+' จุดที่ไม่ผ่าน'+(warn?' และ '+warn+' จุดที่ควรระวัง':'')+'</p></div>'
+        :(warn?'<div class="verdict warn"><b class="h">ใช้ได้ แต่ควรปรับ</b><p>พบ '+warn+' จุดที่ควรระวัง</p></div>'
+        :'<div class="verdict go"><b class="h">ชุดเดิมเหมาะสม</b><p>ใช้ต่อได้ ถ้าต้องการปรับรอบหรือออกตัวนุ่มนวล เพิ่มอินเวอร์เตอร์ได้</p></div>');
+
+  // วิธีแก้
+  var fix=[];
+  var wOk=Math.floor(hp/(HP_PER_WHEEL*powFactor(rpm))+1e-9);
+  if(load>1.0){
+    fix.push('ทางที่ 1: ลดใบพัดเหลือชุดละ '+wOk+' ใบ (ที่รอบเดิม)');
+    var hpUp=STD_HP.find(function(x){return x>=need});
+    if(hpUp) fix.push('ทางที่ 2: เปลี่ยนมอเตอร์เป็น '+hpUp+' แรงม้า'+(hpUp>MAX_1PH?' (ต้องใช้ไฟ 3 เฟส)':''));
+    if(rpm>RPM_STD){var hz=50*RPM_STD/rpm; if(hpNeeded(w,RPM_STD)<=hp*1.0) fix.push('ทางที่ 3: ติดอินเวอร์เตอร์ SAKO ตั้งความถี่ ≈ '+fmt(hz,1)+' Hz ให้ใบพัดกลับมาที่ '+RPM_STD+' รอบ/นาที มอเตอร์จะรับไหวโดยไม่ต้องลดใบพัด');}
+  } else if(rpm>95){
+    fix.push('ติดอินเวอร์เตอร์ SAKO ตั้งความถี่ ≈ '+fmt(50*RPM_STD/rpm,1)+' Hz ให้ใบพัดหมุน '+RPM_STD+' รอบ/นาที ช่วยลดการกินไฟ ปริมาณที่ลดได้ขึ้นกับสภาพบ่อและเครื่อง ให้ดูค่ากำลังไฟที่หน้าจออินเวอร์เตอร์ก่อนและหลังปรับ');
+  }
+  if(have<n.total*0.95){
+    var keep=sets*(load>1.0?wOk:w); var addSets=Math.ceil((n.total-keep)/Math.floor(MAX_1PH/HP_PER_WHEEL));
+    fix.push('ใบพัดรวมยังไม่พอ: เพิ่มชุดตีน้ำอีกประมาณ '+Math.max(1,addSets)+' ชุด (ชุดไฟ 1 เฟส: มอเตอร์ 3 แรงม้า + 6 ใบพัด)');
+  }
+  var kw=hp*0.746, sakoKw=[0.75,1.5,2.2,4,5.5,7.5,11,15].find(function(x){return x>=kw*0.98})||15;
+  var h=head+'<div class="opt"><h3>ชุดที่คุณมีตอนนี้</h3><p class="eq"><b>'+sets+' ชุด</b> · ชุดละมอเตอร์ '+fmt(hp,1)+' แรงม้า + ใบพัด '+w+' ใบ · รวม '+have+' ใบ (บ่อนี้ควรมี '+n.total+' ใบ)</p>'+
+    '<div class="pics"><figure class="pic" style="margin:0">'+setSVG(w,load>1.0)+'<figcaption>1 ชุดของคุณ'+(load>1.0?' (สีแดง = โหลดเกิน)':'')+'</figcaption></figure>'+
+    '<figure class="pic" style="margin:0">'+pondSVG(rai,sets,w,load>1.0)+'<figcaption>ชุดของคุณในบ่อ</figcaption></figure></div></div>'+
+    '<div class="checks">'+res.join('')+'</div>';
+  if(fix.length) h+='<div><h3 style="font-size:1rem;margin-bottom:6px">วิธีแก้</h3><ul class="notes">'+fix.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul></div>';
+  if(bad){var pr=planSets(n.total,rai,hp>MAX_1PH?15:MAX_1PH);
+    h+=optCard('แบบที่แนะนำสำหรับบ่อนี้ ('+(hp>MAX_1PH?'ไฟ 3 เฟส':'ไฟบ้าน 1 เฟส')+')',pr,false,hp>MAX_1PH?'ไฟเข้า 3 เฟส':'ไฟเข้า 1 เฟส (มอเตอร์ต่อแบบเดลต้า 220V)',rai);}
+  else h+='<div class="opt main"><h3>ใช้ชุดเดิมต่อได้ · ต้องเพิ่ม</h3>'+'<div class="bom"><div><b>'+sets+'</b><span>อินเวอร์เตอร์ (ตัว)</span></div><div><b>1</b><span>ชุดควบคุม (ตัวเลือก)</span></div></div><dl>'+
+     '<dt>อินเวอร์เตอร์</dt><dd>SAKO '+sakoKw+' kW ชุดละ 1 ตัว รวม '+sets+' ตัว'+(sakoKw>2.2?' (ไฟเข้า 3 เฟส)':' (ไฟเข้า 1 เฟสได้)')+'</dd>'+
+     '<dt>ชุดควบคุม</dt><dd>ตัวเลือก สอบถามรายละเอียดกับบริษัท</dd></dl>'+
+     (load>1.0?'<p class="hint">แก้ปัญหาโหลดเกินก่อนติดตั้ง อินเวอร์เตอร์จะตัดการทำงานบ่อยถ้ามอเตอร์โหลดเกิน</p>':'')+'</div>';
+  $('rc').innerHTML=h;
+}
+
+document.getElementById('fd').addEventListener('input',design);
+document.getElementById('fc').addEventListener('input',check);
+document.getElementById('fc').addEventListener('change',check);
+design();check();
+})();
+</script>
